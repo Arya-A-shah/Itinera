@@ -1,4 +1,4 @@
-# Travel Booking System
+# Itinera: Travel Booking System
 
 A comprehensive Java desktop application for managing travel bookings, packages, and user accounts with an intuitive interface and robust backend functionality.
 
@@ -88,6 +88,20 @@ For Windows, use `;` instead of `:` in the classpath:
 ```bash
 java -cp bin;lib/mysql-connector-java.jar App
 ```
+
+## Team
+
+| Member | Contribution |
+|---|---|
+| **Arya Shah** | Requirements and ideation, ER modelling, relational schema, SQL triggers, functions and procedures ([database design](docs/DATABASE.md)) |
+| **Ankush** | Java application: Swing UI, service layer, JDBC integration |
+
+## Database Design
+
+15-table normalised MySQL schema with IS-A specialisation for transport types and
+international destinations, composite keys for itineraries and seat bookings, and
+triggers for password hashing and booking/payment consistency.
+See the ER diagram and design notes in [`docs/DATABASE.md`](docs/DATABASE.md).
 
 ## Project Structure
 

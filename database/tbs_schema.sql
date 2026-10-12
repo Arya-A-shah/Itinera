@@ -155,14 +155,19 @@ DELIMITER ;
 
 -- /////////////////////////////////////////////////////////////
 
--- trigger to hash passwords on updation 
+-- trigger to hash passwords on updation
+-- Only re-hash when the password column actually changed. Without this check,
+-- any other UPDATE on the row (e.g. CALL UpdateUserAge) hashed the stored hash
+-- again, and that user could no longer log in.
 DELIMITER $$
 
 CREATE TRIGGER hash_password_before_update
 BEFORE UPDATE ON Users
 FOR EACH ROW
 BEGIN
-    SET NEW.Password = SHA2(NEW.Password, 256);
+    IF NOT (NEW.Password <=> OLD.Password) THEN
+        SET NEW.Password = SHA2(NEW.Password, 256);
+    END IF;
 END$$
 
 DELIMITER ;
